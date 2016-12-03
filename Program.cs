@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using SevenZip;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +17,8 @@ namespace ConsoleApplication5
 
             Console.Write("Descomprimiendo el archivo {0}.7z... ", ConfigurationManager.AppSettings["path_file_contribuyentes"]);
             var ms = new MemoryStream();
+
+            SevenZip.SevenZipExtractor.SetLibraryPath("7z-x86.dll");
             var sevenZip = new SevenZip.SevenZipExtractor(ConfigurationManager.AppSettings["path_file_contribuyentes"] + ".7z");
             sevenZip.ExtractFile(ConfigurationManager.AppSettings["path_file_contribuyentes"] + ".csv", ms);
             Console.Write("Ok!\n\r");
